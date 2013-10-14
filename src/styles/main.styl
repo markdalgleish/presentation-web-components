@@ -1,0 +1,291 @@
+@import 'nib' // CSS3 extensions for Stylus: http://visionmedia.github.io/nib/
+
+// variables!
+
+slide_width = 853px
+slide_height = 480px
+slide_background = rgba(238, 238, 238, 0)
+
+slide_transition_length = .8s
+slide_transition_easing = ease
+slide_transition_translate_x = 0px
+slide_transition_translate_z = 0px
+slide_transition_rotate_y = -20deg
+
+bullet_transition_length = .6s
+bullet_transition_easing = ease
+bullet_transition_translate_x = 16px
+
+// base
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+@media print
+  *
+    -webkit-print-color-adjust: exact
+
+@page
+  size: landscape
+  margin: 0
+
+// bespoke.js layout styles
+
+article
+  transition: background slide_transition_length slide_transition_easing
+  display: none
+  &.bespoke-parent
+    display: block
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    overflow: hidden
+    @media print
+      overflow: visible
+      position: static
+    perspective: 800px
+
+.bespoke-slide
+  transition:
+    transform slide_transition_length slide_transition_easing,
+    opacity slide_transition_length slide_transition_easing,
+    background slide_transition_length slide_transition_easing
+  transform-origin: 50% 50% 0
+  transform-style: preserve-3d
+  backface-visibility: hidden
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+  width: slide_width
+  height: slide_height
+  position: absolute
+  top: 50%
+  margin-top: (slide_height / 2) * -1
+  left: 50%
+  margin-left: (slide_width / 2) * -1
+  background: slide_background
+  padding: 40px
+  border-radius: 0
+  @media print
+    zoom: 1 !important // disable bespoke-scale
+    height: 743px // seems to correspond with an A4, landscape page height
+    width: 100%
+    page-break-before: always
+    position: static
+    margin: 0
+  &.timer
+    transition-delay: 0s
+
+.bespoke-before
+  transform: translateZ(slide_transition_translate_z * -1) translateX(slide_transition_translate_x * -1) rotateY(slide_transition_rotate_y * -1)
+
+.bespoke-after
+  transform: translateZ(slide_transition_translate_z) translateX(slide_transition_translate_x) rotateY(slide_transition_rotate_y)
+  @media print
+    transform: none
+
+.bespoke-inactive
+  opacity: 0
+  pointer-events: none
+  @media print
+    opacity 1
+
+.bespoke-active
+  opacity: 1
+  transition-delay: .4s
+
+// bespoke-bullet styles
+
+.bespoke-bullet
+  transition: all bullet_transition_length bullet_transition_easing
+
+.bespoke-bullet-inactive
+  opacity: 0
+  li&
+    // transform: translateX(bullet_transition_translate_x)
+  @media print
+    opacity: 1
+
+.bespoke-bullet-active
+  opacity: 1
+
+// bespoke-scale styles
+
+.bespoke-scale-parent
+  perspective: 600px
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  @media print
+    transform: none !important
+
+// bespoke-progress styles
+
+.bespoke-progress-parent
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: 8px
+  z-index: -1
+  @media print
+    display: none
+
+.bespoke-progress-bar
+  transition: all slide_transition_length slide_transition_easing
+  position: absolute
+  height: 100%
+  top: 0
+  background: #4B44FF
+
+// bespoke-state styles
+
+.emphatic,
+.emphatic .bespoke-slide
+  background: slide_background
+
+// prism styles
+
+code
+  display: block // fixes flexbox rendering issues in Safari
+  padding: 30px !important
+  transform: translateZ(0px)
+  max-height: 80%
+  overflow: auto
+  border-radius: 0 !important
+  &.bespoke-bullet-inactive
+    transform: translateZ(-30px)
+
+// content styles
+
+body
+  font-family: helvetica, arial, sans-serif
+  font-size: 18px
+  color: #404040
+
+h1
+  max-width: 75%
+  color: #4B44FF
+  font-weight: 200
+  font-size: 72px
+  line-height: 82px
+  letter-spacing: -2px
+  margin-bottom: 16px
+  transform: translateZ(-140px)
+
+  &.bespoke-bullet-inactive
+    transform: translateZ(-100px) rotateX(20deg)
+
+h2
+  font-weight: 200
+  font-size: 42px
+  letter-spacing: -1px
+  margin-bottom: 12px
+  color: #404040
+  transform: translateZ(-100px)
+
+h3
+  font-size: 24px
+  font-weight: 600
+  letter-spacing: -1px
+  margin-bottom: 24px
+  color: #404040
+  transform: translateZ(-60px)
+  .title &.bespoke-bullet-inactive
+    transform: translateZ(-80px)
+
+hr
+  visibility: hidden
+  height: 20px
+
+ul
+  list-style: none
+  transform: translateZ(-40px)
+
+li
+  margin-bottom: 12px
+
+ul.bubbles
+  bubble_size = 120px
+  position: relative
+  width: 0
+  height: bubble_size
+  transform-style: preserve-3d
+
+  li
+    position: absolute
+    width: bubble_size
+    height: bubble_size
+    border-radius: bubble_size
+    color: white
+    background: #4B44FF
+    left: 50%
+    transition-duration: bullet_transition_length
+    &:nth-child(1)
+      margin-left: -360px
+      &.bespoke-bullet-inactive
+        transform: translateZ(-20px)
+    &:nth-child(2)
+      margin-left: -210px
+      &.bespoke-bullet-inactive
+        transform: translateZ(-20px)
+    &:nth-child(3)
+      margin-left: -(bubble_size / 2)
+      &.bespoke-bullet-inactive
+        transform: translateZ(-20px)
+    &:nth-child(4)
+      margin-left: 210px - bubble_size
+      &.bespoke-bullet-inactive
+        transform: translateZ(-20px)
+    &:nth-child(5)
+      margin-left: 360px - bubble_size
+      &.bespoke-bullet-inactive
+        transform: translateZ(-20px)
+    span
+      position: absolute
+      width: 90%
+      left: 6%
+      top: 73.5%
+      margin-top: -50px
+
+p
+  margin: 0 100px 12px
+  line-height: 22px
+  transform: translateZ(-20px)
+
+a
+  color: #4B44FF
+  text-decoration: none
+
+.avatar
+  img
+    height: 240px
+    // border-radius: 20px
+    border-radius: 200px
+    transform: translateZ(-200px)
+
+// "You're an expert" styles
+.card
+  background: rgba(238, 238, 238, 1)
+[data-bespoke-state*='card']
+  h1
+    transform: translateZ(-100px)
+    width: 100%
+    padding: 50px 100px
+    background: white
+[data-bespoke-state*='title card']
+  h1
+    padding-bottom: 115px
+    margin-bottom: -95px
+[data-bespoke-state*='expert card']
+  h1
+    padding-top: 90px
+    margin-top: -100px

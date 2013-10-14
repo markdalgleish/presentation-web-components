@@ -1,0 +1,370 @@
+!!! 5
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title Web Components
+
+    //- Check out 'src/bower_components/prism/themes/' for available themes
+    link(rel='stylesheet', type='text/css', href='bower_components/prism/themes/prism-okaidia.css')
+
+    link(rel='stylesheet', type='text/css', href='styles/main.css')
+
+  body
+
+    article
+
+      section
+
+      section.timer
+        h1 15:00
+
+      section.avatar
+        a(href='http://twitter.com/markdalgleish', target='_blank')
+          img(src='images/avatar.jpg')
+
+      section(data-bespoke-state='title card')
+        .bullet
+        h1 Web Components
+        h3.bullet Why you're already an expert
+
+      section
+        h1 Why?
+
+      section
+        h3.bullet The Dream
+        hr
+        code.bullet.language-markup
+          pre.
+            <link rel="import" href="my-widget.html">
+        hr
+        code.bullet.language-markup
+          pre.
+            <my-widget />
+
+      section
+        h3.bullet The Reality
+        hr
+        code.bullet.language-markup
+          pre.
+            <link rel="stylesheet" type="text/css" href="my-widget.css" />
+            <script src="my-widget.js"></script>
+        hr
+        code.bullet.language-markup
+          pre.
+            <div data-my-widget />
+        hr
+        code.bullet.language-javascript
+          pre.
+            $(function() {
+              $('[data-my-widget]').myWidget();
+            });
+
+      section
+        h3.bullet The Dream
+        code.bullet.language-javascript
+          pre.
+            div.innerHTML = '<my-widget />';
+
+      section
+        h3.bullet The Reality
+        hr
+        code.bullet.language-javascript
+          pre div.innerHTML = '<div data-my-widget />'
+        hr
+        code.bullet.language-javascript
+          pre $(div).find('[data-my-widget]').myWidget(); // again...
+
+      section
+        h3.bullet The Dream
+        hr
+        code.bullet.language-markup
+          pre.
+            <x-chatroom>
+              <x-messages>
+                <x-message>
+                  <x-author>markdalgleish</x-author>
+                  <x-content>Hello world!</x-content>
+                </x-message>
+              </x-messages>
+            </x-chatroom>
+
+      section
+        h3.bullet The Reality
+        hr
+        code.bullet.language-markup
+          pre.
+            <section class="chatroom">
+              <ul class="chatroom-messages">
+                <li class="chatroom-message">
+                  <div class="chatroom-message-author">markdalgleish</div>
+                  <div class="chatroom-message-content">Hello world!</div>
+                  <button class="secondary edit">Edit</button>
+                  <button class="secondary delete">Delete</button>
+                </li>
+              </ul>
+            </section>
+
+      section
+        h2.bullet Big scary technologies?
+        hr
+        ul.bubbles
+          li
+            span Custom Elements
+          li
+            span Shadow DOM
+          li
+            span Template Element
+          li
+            span HTML Imports
+          li
+            span CSS Decorators
+
+      section(data-bespoke-state='title card')
+        h1.bullet DOM Elements
+        h3.bullet You're already an expert
+
+      section
+        h3.bullet Elements can be instantiated with markup
+        code.bullet.language-markup
+          pre <input type="text" />
+
+      section
+        h3.bullet Elements can be instantiated with JS
+        hr
+        code.bullet.language-javascript
+          pre var input = document.createElement('input');
+        hr
+        code.bullet.language-javascript
+          pre el.innerHTML = '<input type="text" />';
+
+      section
+        h3.bullet Elements are instances
+        code.bullet.language-javascript
+          pre input instanceof HTMLInputElement; // true
+
+      section
+        h3.bullet Elements perform their own initialisation
+        hr
+        code.bullet.language-javascript
+          pre el.innerHTML = '<input type="text" value="foobar" />';
+        hr
+        code.bullet.language-javascript
+          pre el.querySelector('input').value; // "foobar"
+
+      section
+        h3.bullet Elements can respond to attribute changes
+        hr
+        code.bullet.language-javascript
+          pre input.setAttribute('value', 'Foobar')
+        hr
+        code.bullet.language-javascript
+          pre input.value; // "Foobar"
+
+      section
+        h3.bullet Different element types have different properties
+        hr
+        code.bullet.language-javascript
+          pre input.value;
+        hr
+        code.bullet.language-javascript
+          pre select.selectedIndex;
+
+      section(data-bespoke-state='card')
+        h1 Custom Elements
+
+      section
+        h3.bullet Register a new custom element
+        code.bullet.language-javascript
+          pre.
+            var MyElement = document.register('my-element');
+
+      section
+        h3.bullet Custom elements can be instantiated with markup
+        code.bullet.language-markup
+          pre <my-element />
+
+      section
+        h3.bullet Custom elements can be instantiated with JS
+        hr
+        code.bullet.language-javascript
+          pre document.createElement('my-element');
+        hr
+        code.bullet.language-javascript
+          pre el.innerHTML = '<my-element />';
+        hr
+        code.bullet.language-javascript
+          pre new MyElement();
+
+      section
+        h3.bullet Custom elements are instances
+        code.bullet.language-javascript
+          pre myElement instanceof MyElement; // true
+
+      section
+        h3.bullet Custom elements can perform their own initialisation
+        hr
+        code.bullet.language-javascript
+          pre.
+            document.register('my-element', {
+              prototype: Object.create(HTMLElement.prototype, {
+
+                createdCallback: {
+                  value: function() {
+                    this.innerHTML = '<h1>ELEMENT CREATED!</h1>';
+                  }
+                }
+
+              })
+            });
+
+      section
+        h3.bullet Custom elements can respond to attribute changes
+        hr
+        code.bullet.language-javascript
+          pre.
+            document.register('my-element', {
+              prototype: Object.create(HTMLElement.prototype, {
+
+                attributeChangedCallback: {
+                  value: function(attr, oldVal, newVal) {
+                    this.innerHTML('<h1>ATTRIBUTE CHANGED!</h1>');
+                  }
+                }
+
+              })
+            });
+
+      section
+        h3.bullet Custom elements can have custom properties
+        hr
+        code.bullet.language-javascript
+          pre.
+            document.register('my-element', {
+              prototype: Object.create(HTMLElement.prototype, {
+
+                foo: {
+                  get: function() {
+                    return 'bar';
+                  }
+                }
+
+            });
+
+      section(data-bespoke-state='title card')
+        h1.bullet Private Elements
+        h3.bullet You're already an expert
+
+      section
+        h3.bullet Elements can have hidden internal DOM structures
+        hr
+        input.bullet(type="date")
+        hr
+        hr
+        code.bullet.language-markup
+          pre <input type="date" />
+        hr
+        code.bullet.language-javascript
+          pre dateInput.children.length; // 0
+
+      section(data-bespoke-state='card')
+        h1 Shadow DOM
+
+      section
+        h3.bullet Custom elements can have hidden internal DOM structures
+        code.bullet.language-javascript
+          pre.
+            // document.register...
+
+            createdCallback: {
+              value: function() {
+                var shadow = this.createShadowRoot();
+                shadow.textContent = "You can see me, but I'm not the DOM";
+              }
+            }
+
+      section(data-bespoke-state='title card')
+        h1.bullet Private Styles
+        h3.bullet You're already an expert
+
+      section
+        h3.bullet Elements can have their own private styles
+        hr
+        input.bullet(type="date")
+        hr
+        hr
+        p.bullet (Notice you <strong>don't</strong> need to do this)
+        code.bullet.language-markup
+          pre <link rel="stylesheet" type="text/css" href="calendar.css" />
+
+      section
+        h3.bullet Elements can provide style hooks to their internals
+        code.bullet.language-css
+          pre.
+            dialog::backdrop {
+              background: black;
+            }
+
+      section(data-bespoke-state='card')
+        h1 Scoped Styles
+
+      section
+        h3.bullet Custom elements have scoped styles by default
+        hr
+        code.bullet.language-javascript
+          pre.
+            shadow = this.createShadowRoot();
+            shadow.innerHTML =
+              '<style>em { color: green; }</style>' +
+              'Hello <em>World</em>';
+        hr
+        code.bullet.language-markup
+          pre.
+            <my-element /> <!-- "World" is green -->
+            <em>I'm not green</em>
+
+      section
+        h3.bullet Custom elements can provide style hooks to their internals
+        hr
+        code.bullet.language-javascript
+          pre.
+            createdCallback: {
+              value: function() {
+                var shadow = this.createShadowRoot();
+                shadow.innerHTML = 'Hello <em part="foo">World</em>';
+              }
+            }
+        hr
+        code.bullet.language-css
+          pre.
+            my-element::part(foo) {
+              color: green;
+            }
+
+      section(data-bespoke-state='card')
+        h1 Trying it for yourself
+
+      section
+        h2.bullet <a href="chrome://flags">chrome://flags</a>
+        h3.bullet Enable "experimental Web Platform features"
+
+      section
+        h3.bullet In the console, run:
+        code.bullet.language-javascript
+          pre.
+            var FooBar = document.register('foo-bar');
+        hr
+        hr
+        h3.bullet Then, experiment!
+
+      section
+        h1 Thank you!
+
+    script(src='bower_components/bespoke.js/dist/bespoke.min.js')
+    script(src='bower_components/bespoke-bullets/dist/bespoke-bullets.min.js')
+    script(src='bower_components/bespoke-scale/dist/bespoke-scale.min.js')
+    script(src='bower_components/bespoke-hash/dist/bespoke-hash.min.js')
+    script(src='bower_components/bespoke-progress/dist/bespoke-progress.min.js')
+    script(src='bower_components/bespoke-state/dist/bespoke-state.min.js')
+    script(src='bower_components/prism/prism.js')
+    script(src='scripts/main.js')

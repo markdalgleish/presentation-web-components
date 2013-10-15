@@ -2,8 +2,8 @@
 
 // variables!
 
-slide_width = 853px
-slide_height = 480px
+slide_width = 848px
+slide_height = 530px
 slide_background = rgba(238, 238, 238, 0)
 
 slide_transition_length = .8s
@@ -70,7 +70,7 @@ article
   left: 50%
   margin-left: (slide_width / 2) * -1
   background: slide_background
-  padding: 40px
+  padding: 0
   border-radius: 0
   @media print
     zoom: 1 !important // disable bespoke-scale
@@ -81,6 +81,12 @@ article
     margin: 0
   &.timer
     transition-delay: 0s
+  &.tech
+    &.bespoke-before
+      transform: none
+      transition-duration: 0.4s
+    &.bespoke-after
+      transform: translateY(-100%)
 
 .bespoke-before
   transform: translateZ(slide_transition_translate_z * -1) translateX(slide_transition_translate_x * -1) rotateY(slide_transition_rotate_y * -1)
@@ -213,48 +219,54 @@ ul
 li
   margin-bottom: 12px
 
-ul.bubbles
-  bubble_size = 120px
-  position: relative
-  width: 0
-  height: bubble_size
-  transform-style: preserve-3d
+ul.tech
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  overflow: hidden
+  transform: translateZ(0px)
 
   li
-    position: absolute
-    width: bubble_size
-    height: bubble_size
-    border-radius: bubble_size
+    position: relative
+    height: 20%
+    line-height: 106px
+    margin: 0
     color: white
-    background: #4B44FF
-    left: 50%
-    transition-duration: bullet_transition_length
+    font-size: 42px
+    font-weight: 200
+    text-align: left
+    padding-left: 30px
+
+    &.bespoke-bullet-inactive
+      opacity: 1
+
     &:nth-child(1)
-      margin-left: -360px
+      background: #4B44FF
+      z-index: 5
       &.bespoke-bullet-inactive
-        transform: translateZ(-20px)
+        transform: translateY(-100%)
     &:nth-child(2)
-      margin-left: -210px
+      background: lighten(#4B44FF, 8%)
+      z-index: 4
       &.bespoke-bullet-inactive
-        transform: translateZ(-20px)
+        transform: translateY(-200%)
     &:nth-child(3)
-      margin-left: -(bubble_size / 2)
+      background: lighten(#4B44FF, 16%)
+      z-index: 3
       &.bespoke-bullet-inactive
-        transform: translateZ(-20px)
+        transform: translateY(-300%)
     &:nth-child(4)
-      margin-left: 210px - bubble_size
+      background: lighten(#4B44FF, 24%)
+      z-index: 2
       &.bespoke-bullet-inactive
-        transform: translateZ(-20px)
+        transform: translateY(-400%)
     &:nth-child(5)
-      margin-left: 360px - bubble_size
+      background: lighten(#4B44FF, 32%)
+      z-index: 1
       &.bespoke-bullet-inactive
-        transform: translateZ(-20px)
-    span
-      position: absolute
-      width: 90%
-      left: 6%
-      top: 73.5%
-      margin-top: -50px
+        transform: translateY(-500%)
 
 p
   margin: 0 100px 12px

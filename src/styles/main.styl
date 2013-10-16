@@ -83,10 +83,13 @@ article
     transition-delay: 0s
   &.tech
     &.bespoke-before
-      transform: none
-      transition-duration: 0.4s
+      transform: rotateY(-5deg)
+      transition-duration: 3s
+    + .bespoke-slide.bespoke-active
+      transition-delay: .5s
     &.bespoke-after
-      transform: translateY(-100%)
+      transform: translateY(-10%)
+      opacity: 0
 
 .bespoke-before
   transform: translateZ(slide_transition_translate_z * -1) translateX(slide_transition_translate_x * -1) rotateY(slide_transition_rotate_y * -1)
@@ -178,7 +181,7 @@ body
   color: #404040
 
 h1
-  max-width: 75%
+  max-width: 70%
   color: #4B44FF
   font-weight: 200
   font-size: 72px
@@ -225,8 +228,7 @@ ul.tech
   left: 0
   right: 0
   bottom: 0
-  overflow: hidden
-  transform: translateZ(0px)
+  transform: translateZ(-100px) rotateX(4deg)
 
   li
     position: relative
@@ -240,33 +242,48 @@ ul.tech
     padding-left: 30px
 
     &.bespoke-bullet-inactive
-      opacity: 1
+      opacity: 0
 
     &:nth-child(1)
       background: #4B44FF
       z-index: 5
       &.bespoke-bullet-inactive
-        transform: translateY(-100%)
+        transform: translateY(-20%)
+      .bespoke-before &
+        transform: translateX(-120%);
+        transition-delay: 0s
     &:nth-child(2)
       background: lighten(#4B44FF, 8%)
       z-index: 4
       &.bespoke-bullet-inactive
-        transform: translateY(-200%)
+        transform: translateY(-100%)
+      .bespoke-before &
+        transform: translateX(-120%);
+        transition-delay: .1s
     &:nth-child(3)
       background: lighten(#4B44FF, 16%)
       z-index: 3
       &.bespoke-bullet-inactive
-        transform: translateY(-300%)
+        transform: translateY(-200%)
+      .bespoke-before &
+        transform: translateX(-120%);
+        transition-delay: .2s
     &:nth-child(4)
       background: lighten(#4B44FF, 24%)
       z-index: 2
       &.bespoke-bullet-inactive
-        transform: translateY(-400%)
+        transform: translateY(-300%)
+      .bespoke-before &
+        transform: translateX(-120%);
+        transition-delay: .3s
     &:nth-child(5)
       background: lighten(#4B44FF, 32%)
       z-index: 1
       &.bespoke-bullet-inactive
-        transform: translateY(-500%)
+        transform: translateY(-400%)
+      .bespoke-before &
+        transform: translateX(-120%);
+        transition-delay: .4s
 
 p
   margin: 0 100px 12px

@@ -139,8 +139,12 @@ html
 
       section
         h3.bullet Elements are instances
+        hr
         code.bullet.language-javascript
           pre input instanceof HTMLInputElement; // true
+        hr
+        code.bullet.language-javascript
+          pre div instanceof HTMLDivElement; // true
 
       section
         h3.bullet Elements perform their own initialisation
@@ -168,6 +172,36 @@ html
         hr
         code.bullet.language-javascript
           pre select.selectedIndex;
+
+      section
+        h3.bullet Elements can have hidden internal DOM structures
+        hr
+        input.bullet(type="date")
+        hr
+        hr
+        code.bullet.language-markup
+          pre <input type="date" />
+        hr
+        code.bullet.language-javascript
+          pre dateInput.children.length; // 0
+
+      section
+        h3.bullet Elements can have their own private styles
+        hr
+        input.bullet(type="date")
+        hr
+        hr
+        p.bullet (Notice you <strong>don't</strong> need to do this)
+        code.bullet.language-markup
+          pre <link rel="stylesheet" type="text/css" href="calendar.css" />
+
+      section
+        h3.bullet Elements can provide style hooks to their internals
+        code.bullet.language-css
+          pre.
+            dialog::backdrop {
+              background: black;
+            }
 
       section(data-bespoke-state='card')
         h1 Custom Elements
@@ -198,83 +232,75 @@ html
       section
         h3.bullet Custom elements are instances
         code.bullet.language-javascript
-          pre myElement instanceof MyElement; // true
+          pre document.create('my-element') instanceof MyElement; // true
 
-      section
+      section.code-bullets
         h3.bullet Custom elements can perform their own initialisation
         hr
         code.bullet.language-javascript
           pre.
             document.register('my-element', {
               prototype: Object.create(HTMLElement.prototype, {
-
-                createdCallback: {
-                  value: function() {
-                    this.innerHTML = '<h1>ELEMENT CREATED!</h1>';
-                  }
-                }
-
+        code.bullet.language-javascript
+          pre.
+            &nbsp;&nbsp;&nbsp;&nbsp;createdCallback: {
+            &nbsp;&nbsp;&nbsp;&nbsp;  value: function() {
+            &nbsp;&nbsp;&nbsp;&nbsp;    this.innerHTML = '<h1>ELEMENT CREATED!</h1>';
+            &nbsp;&nbsp;&nbsp;&nbsp;  }
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+        code.bullet.language-javascript
+          pre.
               })
             });
 
-      section
+      section.code-bullets
         h3.bullet Custom elements can respond to attribute changes
         hr
         code.bullet.language-javascript
           pre.
             document.register('my-element', {
               prototype: Object.create(HTMLElement.prototype, {
-
-                attributeChangedCallback: {
-                  value: function(attr, oldVal, newVal) {
-                    this.innerHTML('<h1>ATTRIBUTE CHANGED!</h1>');
-                  }
-                }
-
+        code.bullet.language-javascript
+          pre.
+            &nbsp;&nbsp;&nbsp;&nbsp;attributeChangedCallback: {
+            &nbsp;&nbsp;&nbsp;&nbsp;  value: function(attr, oldVal, newVal) {
+            &nbsp;&nbsp;&nbsp;&nbsp;    this.innerHTML('<h1>ATTRIBUTE CHANGED!</h1>');
+            &nbsp;&nbsp;&nbsp;&nbsp;  }
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+        code.bullet.language-javascript
+          pre.
               })
             });
 
-      section
+      section.code-bullets
         h3.bullet Custom elements can have custom properties
         hr
         code.bullet.language-javascript
           pre.
             document.register('my-element', {
               prototype: Object.create(HTMLElement.prototype, {
-
-                foo: {
-                  get: function() {
-                    return 'bar';
-                  }
-                }
-
-            });
-
-      section(data-bespoke-state='title card')
-        h1 Private Elements
-        h3 You're already an expert
-
-      section
-        h3.bullet Elements can have hidden internal DOM structures
-        hr
-        input.bullet(type="date")
-        hr
-        hr
-        code.bullet.language-markup
-          pre <input type="date" />
-        hr
         code.bullet.language-javascript
-          pre dateInput.children.length; // 0
+          pre.
+            &nbsp;&nbsp;&nbsp;&nbsp;foo: {
+            &nbsp;&nbsp;&nbsp;&nbsp;  get: function() {
+            &nbsp;&nbsp;&nbsp;&nbsp;    return 'bar';
+            &nbsp;&nbsp;&nbsp;&nbsp;  }
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+        code.bullet.language-javascript
+          pre.
+              })
+            });
 
       section(data-bespoke-state='card')
         h1 Shadow DOM
 
-      section
+      section.code-bullets
         h3.bullet Custom elements can have hidden internal DOM structures
         code.bullet.language-javascript
           pre.
             // document.register...
-
+        code.bullet.language-javascript
+          pre.
             createdCallback: {
               value: function() {
                 var shadow = this.createShadowRoot();
@@ -282,33 +308,11 @@ html
               }
             }
 
-      section(data-bespoke-state='title card')
-        h1 Private Styles
-        h3 You're already an expert
-
-      section
-        h3.bullet Elements can have their own private styles
-        hr
-        input.bullet(type="date")
-        hr
-        hr
-        p.bullet (Notice you <strong>don't</strong> need to do this)
-        code.bullet.language-markup
-          pre <link rel="stylesheet" type="text/css" href="calendar.css" />
-
-      section
-        h3.bullet Elements can provide style hooks to their internals
-        code.bullet.language-css
-          pre.
-            dialog::backdrop {
-              background: black;
-            }
-
       section(data-bespoke-state='card')
-        h1 Scoped Styles
+        h1 Private Styles
 
       section
-        h3.bullet Custom elements have scoped styles by default
+        h3.bullet Custom elements have private styles by default
         hr
         code.bullet.language-javascript
           pre.

@@ -31,20 +31,10 @@ html
       section
         h1 Why?
 
-      section
-        h3.bullet The Dream
-        hr
-        code.bullet.language-markup
-          pre.
-            <link rel="import" href="my-widget.html">
-        hr
-        code.bullet.language-markup
-          pre.
-            <my-widget />
+      section(data-bespoke-state='card')
+        h1 Components Today
 
       section
-        h3.bullet The Reality
-        hr
         code.bullet.language-markup
           pre.
             <link rel="stylesheet" type="text/css" href="my-widget.css" />
@@ -61,14 +51,6 @@ html
             });
 
       section
-        h3.bullet The Dream
-        code.bullet.language-javascript
-          pre.
-            div.innerHTML = '<my-widget />';
-
-      section
-        h3.bullet The Reality
-        hr
         code.bullet.language-javascript
           pre div.innerHTML = '<div data-my-widget />'
         hr
@@ -76,34 +58,46 @@ html
           pre $(div).find('[data-my-widget]').myWidget(); // again...
 
       section
-        h3.bullet The Dream
-        hr
         code.bullet.language-markup
           pre.
-            <x-chatroom>
-              <x-messages>
-                <x-message>
-                  <x-author>markdalgleish</x-author>
-                  <x-content>Hello world!</x-content>
-                </x-message>
-              </x-messages>
-            </x-chatroom>
+            <div data-my-widget>
+              <div class="my-widget-foobar">
+                  <input type="text" />
+                  <button>Go</button>
+              </div>
+            </div>
+
+      section(data-bespoke-state='card')
+        h1 Web Components
 
       section
-        h3.bullet The Reality
+        code.bullet.language-markup
+          pre.
+            <link rel="import" href="my-widget.html">
         hr
         code.bullet.language-markup
           pre.
-            <section class="chatroom">
-              <ul class="chatroom-messages">
-                <li class="chatroom-message">
-                  <div class="chatroom-message-author">markdalgleish</div>
-                  <div class="chatroom-message-content">Hello world!</div>
-                  <button class="secondary edit">Edit</button>
-                  <button class="secondary delete">Delete</button>
-                </li>
-              </ul>
-            </section>
+            <my-widget />
+
+      section
+        code.bullet.language-javascript
+          pre.
+            div.innerHTML = '<my-widget />';
+
+      section.narrow.code-bullets
+        code.bullet.language-markup
+          pre.
+            <my-widget>
+        code.bullet.language-markup.shadow-dom
+          pre.
+            &nbsp;&nbsp;#document-fragment
+            &nbsp;&nbsp;  <div class="foobar">
+            &nbsp;&nbsp;    <input type="text" />
+            &nbsp;&nbsp;    <button>Go</button>
+            &nbsp;&nbsp;  </div>
+        code.bullet.language-markup
+          pre.
+            </my-widget>
 
       section.tech
         .bullet
@@ -296,15 +290,13 @@ html
 
       section.code-bullets
         h3.bullet Custom elements can have hidden internal DOM structures
-        code.bullet.language-javascript
-          pre.
-            // document.register...
+        hr
         code.bullet.language-javascript
           pre.
             createdCallback: {
               value: function() {
                 var shadow = this.createShadowRoot();
-                shadow.textContent = "You can see me, but I'm not the DOM";
+                shadow.innerHTML = "<h1>SHADOW DOM!</h1>";
               }
             }
 
@@ -318,12 +310,12 @@ html
           pre.
             shadow = this.createShadowRoot();
             shadow.innerHTML =
-              '<style>em { color: green; }</style>' +
-              'Hello <em>World</em>';
+              "<style>em { color: green; }</style>"" +
+              "<em>I'm green</em>";
         hr
         code.bullet.language-markup
           pre.
-            <my-element /> <!-- "World" is green -->
+            <my-element />
             <em>I'm not green</em>
 
       section
@@ -334,13 +326,13 @@ html
             createdCallback: {
               value: function() {
                 var shadow = this.createShadowRoot();
-                shadow.innerHTML = 'Hello <em part="foo">World</em>';
+                shadow.innerHTML = 'Hello <em part="world">World</em>';
               }
             }
         hr
         code.bullet.language-css
           pre.
-            my-element::part(foo) {
+            my-element::part(world) {
               color: green;
             }
 

@@ -4,7 +4,7 @@
 
 slide_width = 848px
 slide_height = 530px
-slide_background = rgba(238, 238, 238, 0)
+slide_background = rgba(213, 213, 213, 0)
 
 slide_transition_length = .8s
 slide_transition_easing = ease
@@ -94,6 +94,8 @@ article
     code
       padding-bottom: 0
       width: 80%
+    &.narrow code
+      width: 50%
 
 .bespoke-before
   transform: translateZ(slide_transition_translate_z * -1) translateX(slide_transition_translate_x * -1) rotateY(slide_transition_rotate_y * -1)
@@ -175,7 +177,13 @@ code
   overflow: auto
   border-radius: 0 !important
   &.bespoke-bullet-inactive
-    transform: translateZ(-30px)
+    transform: translateY(10%) rotateX(5deg) rotateY(-5deg)
+  &.shadow-dom.bespoke-bullet-active
+    background: lighten(#272822, 15%)
+  .token.property, .token.tag, .token.constant, .token.symbol
+    color: #FF8CA3
+  .token.comment
+    color: #ADC4EC
 
 // content styles
 
@@ -307,7 +315,7 @@ a
 
 // "You're an expert" styles
 .card
-  background: rgba(238, 238, 238, 1)
+  background: rgba(213, 213, 213, 1)
 [data-bespoke-state*='card']
   h1
     transform: translateZ(-100px)

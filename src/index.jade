@@ -62,8 +62,8 @@ html
           pre.
             <div data-my-widget>
               <div class="my-widget-foobar">
-                  <input type="text" />
-                  <button>Go</button>
+                  <input type="text" class="my-widget-text" />
+                  <button class="my-widget-button">Go</button>
               </div>
             </div>
 
@@ -73,7 +73,7 @@ html
       section
         code.bullet.language-markup
           pre.
-            <link rel="import" href="my-widget.html">
+            <link rel="import" href="my-widget.html" />
         hr
         code.bullet.language-markup
           pre.
@@ -91,7 +91,7 @@ html
         code.bullet.language-markup.shadow-dom
           pre.
             &nbsp;&nbsp;#document-fragment
-            &nbsp;&nbsp;  <div class="foobar">
+            &nbsp;&nbsp;  <div>
             &nbsp;&nbsp;    <input type="text" />
             &nbsp;&nbsp;    <button>Go</button>
             &nbsp;&nbsp;  </div>
@@ -157,15 +157,6 @@ html
         hr
         code.bullet.language-javascript
           pre input.value; // "Foobar"
-
-      section
-        h3.bullet Different element types have different properties
-        hr
-        code.bullet.language-javascript
-          pre input.value;
-        hr
-        code.bullet.language-javascript
-          pre select.selectedIndex;
 
       section
         h3.bullet Elements can have hidden internal DOM structures
@@ -282,25 +273,6 @@ html
               })
             });
 
-      section.code-bullets
-        h3.bullet Custom elements can have custom properties
-        hr
-        code.bullet.language-javascript
-          pre.
-            document.register('my-element', {
-              prototype: Object.create(HTMLElement.prototype, {
-        code.bullet.language-javascript
-          pre.
-            &nbsp;&nbsp;&nbsp;&nbsp;foo: {
-            &nbsp;&nbsp;&nbsp;&nbsp;  get: function() {
-            &nbsp;&nbsp;&nbsp;&nbsp;    return 'bar';
-            &nbsp;&nbsp;&nbsp;&nbsp;  }
-            &nbsp;&nbsp;&nbsp;&nbsp;}
-        code.bullet.language-javascript
-          pre.
-              })
-            });
-
       section(data-bespoke-state='card')
         h1 Shadow DOM
 
@@ -321,14 +293,17 @@ html
         hr
         code.bullet.language-markup
           pre.
-            <my-element>Content can be <b>selected</b></my-element>
+            <my-element>
+              <i>hello</i>
+              <i>world</i>
+            </my-element>
         hr
         code.bullet.language-javascript
           pre.
             createdCallback: {
               value: function() {
                 var shadow = this.createShadowRoot();
-                shadow.innerHTML = 'The bold word is: <content select="b" />';
+                shadow.innerHTML = 'The <i> tags are: <content select="i" />';
               }
             }
 
@@ -342,13 +317,13 @@ html
           pre.
             shadow = this.createShadowRoot();
             shadow.innerHTML =
-              "<style>em { color: green; }</style>"" +
-              "<em>I'm green</em>";
+              "<style>span { color: green; }</style>" +
+              "<span>I'm green</span>";
         hr
         code.bullet.language-markup
           pre.
             <my-element />
-            <em>I'm not green</em>
+            <span>I'm not green</span>
 
       section
         h3.bullet Custom elements can provide style hooks to their internals
@@ -368,24 +343,50 @@ html
               color: green;
             }
 
+      section.tech
+        .bullet
+          ul.tech
+            li
+              span Simple
+            li
+              span Consistent
+            li
+              span Reusable
+            li
+              span Encapsulated
+            li
+              span Composable
+
       section(data-bespoke-state='card')
-        h1 Trying it for yourself
+        h1 Just the beginning
 
       section
-        h2.bullet <a href="chrome://flags">chrome://flags</a>
+        h1.bullet <a href="chrome://flags">chrome://flags</a>
+        hr
         h3.bullet Enable "experimental Web Platform features"
 
       section
-        h3.bullet In the console, run:
-        code.bullet.language-javascript
-          pre.
-            var FooBar = document.register('foo-bar');
+        h1.bullet Polyfills
         hr
-        hr
-        h3.bullet Then, experiment!
+        h3.bullet Google's <a href="http://www.polymer-project.org/">Polymer</a>
+        h3.bullet Mozilla's <a href="http://www.x-tags.org/">X-Tag</a>
 
       section
+        h1.bullet Components
+        hr
+        h3.bullet <a href="https://github.com/Polymer/polymer-elements">Polymer Elements</a>
+        h3.bullet <a href="https://github.com/Polymer/polymer-ui-elements">Polymer UI Elements</a>
+        h3.bullet <a href="http://mozilla.github.io/brick/">Brick</a>
+        h3.bullet <a href="http://registry.x-tags.org/">X-Tag Registry</a>
+
+      section(data-bespoke-state='card')
+        h1 Open the console and experiment
+
+      section.thank-you
+        a(href='http://twitter.com/markdalgleish', target='_blank')
+          img(src='images/avatar.jpg')
         h1 Thank you!
+        h3 Slides: <a href="#">bit.ly/webcomponents</a>
 
     script(src='bower_components/bespoke.js/dist/bespoke.min.js')
     script(src='bower_components/bespoke-bullets/dist/bespoke-bullets.min.js')

@@ -114,8 +114,8 @@ html
             span CSS Decorators
 
       section(data-bespoke-state='title card')
-        h1 DOM Elements
-        h3 You're already an expert
+        h1.bullet DOM Elements
+        h3.bullet You're already an expert
 
       section
         h3.bullet Elements can be instantiated with markup
@@ -178,6 +178,22 @@ html
         hr
         code.bullet.language-javascript
           pre dateInput.children.length; // 0
+
+      section
+        h3.bullet Elements have access to child elements
+        hr
+        select.bullet
+          option 1
+          option 2
+          option 3
+        hr
+        code.bullet.language-markup
+          pre.
+            <select>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+            </select>
 
       section
         h3.bullet Elements can have their own private styles
@@ -288,7 +304,7 @@ html
       section(data-bespoke-state='card')
         h1 Shadow DOM
 
-      section.code-bullets
+      section
         h3.bullet Custom elements can have hidden internal DOM structures
         hr
         code.bullet.language-javascript
@@ -300,11 +316,27 @@ html
               }
             }
 
+      section
+        h3.bullet Custom elements have access to child elements
+        hr
+        code.bullet.language-markup
+          pre.
+            <my-element>Content can be <b>selected</b></my-element>
+        hr
+        code.bullet.language-javascript
+          pre.
+            createdCallback: {
+              value: function() {
+                var shadow = this.createShadowRoot();
+                shadow.innerHTML = 'The bold word is: <content select="b" />';
+              }
+            }
+
       section(data-bespoke-state='card')
-        h1 Private Styles
+        h1 Encapsulated Styles
 
       section
-        h3.bullet Custom elements have private styles by default
+        h3.bullet Custom elements have encapsulated styles by default
         hr
         code.bullet.language-javascript
           pre.

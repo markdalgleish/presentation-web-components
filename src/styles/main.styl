@@ -94,14 +94,16 @@ article
     code
       padding-bottom: 0
       width: 80%
+      &.bespoke-bullet-active
+        transform: none
     &.narrow code
       width: 50%
 
 .bespoke-before
-  transform: translateZ(slide_transition_translate_z * -1) translateX(slide_transition_translate_x * -1) rotateY(slide_transition_rotate_y * -1)
+  transform: translateY(-10px) translateZ(slide_transition_translate_z * -1) translateX(slide_transition_translate_x * -1) rotateY(slide_transition_rotate_y * -1)
 
 .bespoke-after
-  transform: translateZ(slide_transition_translate_z) translateX(slide_transition_translate_x) rotateY(slide_transition_rotate_y)
+  transform: translateY(-10px) translateZ(slide_transition_translate_z) translateX(slide_transition_translate_x) rotateY(slide_transition_rotate_y)
   @media print
     transform: none
 
@@ -114,6 +116,7 @@ article
 .bespoke-active
   opacity: 1
   transition-delay: .4s
+  transform: translateY(-10px)
 
 // bespoke-bullet styles
 
@@ -177,7 +180,9 @@ code
   overflow: auto
   border-radius: 0 !important
   &.bespoke-bullet-inactive
-    transform: translateY(10%) rotateX(5deg) rotateY(-5deg)
+    transform: translateY(10%) rotateX(10deg) rotateY(-5deg)
+  &.bespoke-bullet-active
+    transform: rotateX(3deg)
   &.shadow-dom.bespoke-bullet-active
     background: lighten(#272822, 15%)
   .token.property, .token.tag, .token.constant, .token.symbol
@@ -262,7 +267,7 @@ ul.tech
       &.bespoke-bullet-inactive
         transform: translateY(-20%)
       .bespoke-before &
-        transform: translateX(-120%);
+        transform: translateX(-130%);
         transition-delay: 0s
     &:nth-child(2)
       background: lighten(#4B44FF, 8%)
@@ -270,7 +275,7 @@ ul.tech
       &.bespoke-bullet-inactive
         transform: translateY(-100%)
       .bespoke-before &
-        transform: translateX(-120%);
+        transform: translateX(-130%);
         transition-delay: .1s
     &:nth-child(3)
       background: lighten(#4B44FF, 16%)
@@ -278,7 +283,7 @@ ul.tech
       &.bespoke-bullet-inactive
         transform: translateY(-200%)
       .bespoke-before &
-        transform: translateX(-120%);
+        transform: translateX(-130%);
         transition-delay: .2s
     &:nth-child(4)
       background: lighten(#4B44FF, 24%)
@@ -286,7 +291,7 @@ ul.tech
       &.bespoke-bullet-inactive
         transform: translateY(-300%)
       .bespoke-before &
-        transform: translateX(-120%);
+        transform: translateX(-130%);
         transition-delay: .3s
     &:nth-child(5)
       background: lighten(#4B44FF, 32%)
@@ -294,7 +299,7 @@ ul.tech
       &.bespoke-bullet-inactive
         transform: translateY(-400%)
       .bespoke-before &
-        transform: translateX(-120%);
+        transform: translateX(-130%);
         transition-delay: .4s
 
 p
@@ -309,7 +314,6 @@ a
 .avatar
   img
     height: 240px
-    // border-radius: 20px
     border-radius: 200px
     transform: translateZ(-200px)
 
@@ -325,7 +329,9 @@ a
 [data-bespoke-state*='title card']
   h1
     padding-bottom: 115px
-    margin-bottom: -95px
+    margin-top: -50px
+  h3
+    margin-top: -115px
 [data-bespoke-state*='expert card']
   h1
     padding-top: 90px

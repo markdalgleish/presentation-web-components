@@ -1,0 +1,65 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Web Components</title><link rel="stylesheet" type="text/css" href="bower_components/prism/themes/prism-okaidia.css"><link rel="stylesheet" type="text/css" href="styles/main.css"></head><body><article><section></section><section class="timer"><h1>15:00</h1></section><section class="avatar"><a href="http://twitter.com/markdalgleish" target="_blank"><img src="images/avatar.jpg"></a></section><section data-bespoke-state="title card"><div class="bullet"></div><h1>Web Components</h1><h3 class="bullet">Why you're already an expert</h3></section><section><h1>Why?</h1></section><section data-bespoke-state="card"><h1>Components Today</h1></section><section><code class="bullet language-markup"><pre>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;my-widget.css&quot; /&gt;
+&lt;script src=&quot;my-widget.js&quot;&gt;&lt;/script&gt;</pre></code><hr><code class="bullet language-markup"><pre>&lt;div data-my-widget /&gt;</pre></code><hr><code class="bullet language-javascript"><pre>$(function() {
+  $('[data-my-widget]').myWidget();
+});
+</pre></code></section><section><code class="bullet language-javascript"><pre>div.innerHTML = '&lt;div data-my-widget /&gt;'</pre></code><hr><code class="bullet language-javascript"><pre>$(div).find('[data-my-widget]').myWidget(); // again...</pre></code></section><section><code class="bullet language-markup"><pre>&lt;div data-my-widget&gt;
+  &lt;div class=&quot;my-widget-foobar&quot;&gt;
+      &lt;input type=&quot;text&quot; class=&quot;my-widget-text&quot; /&gt;
+      &lt;button class=&quot;my-widget-button&quot;&gt;Go&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre></code></section><section data-bespoke-state="card"><h1>Web Components</h1></section><section><code class="bullet language-markup"><pre>&lt;link rel=&quot;import&quot; href=&quot;my-widget.html&quot; /&gt;</pre></code><hr><code class="bullet language-markup"><pre>&lt;my-widget /&gt;
+</pre></code></section><section><code class="bullet language-javascript"><pre>div.innerHTML = '&lt;my-widget /&gt;';
+</pre></code></section><section class="narrow code-bullets"><code class="bullet language-markup"><pre>&lt;my-widget&gt;</pre></code><code class="bullet language-markup shadow-dom"><pre>&nbsp;&nbsp;#document-fragment
+&nbsp;&nbsp;  &lt;div&gt;
+&nbsp;&nbsp;    &lt;input type=&quot;text&quot; /&gt;
+&nbsp;&nbsp;    &lt;button&gt;Go&lt;/button&gt;
+&nbsp;&nbsp;  &lt;/div&gt;</pre></code><code class="bullet language-markup"><pre>&lt;/my-widget&gt;
+</pre></code></section><section class="tech"><div class="bullet"></div><ul class="tech"><li><span>Custom Elements</span></li><li><span>Shadow DOM</span></li><li><span>Template Element</span></li><li><span>HTML Imports</span></li><li><span>CSS Decorators</span></li></ul></section><section data-bespoke-state="title card"><h1 class="bullet">DOM Elements</h1><h3 class="bullet">You're already an expert</h3></section><section><h3 class="bullet">Elements can be instantiated with markup</h3><code class="bullet language-markup"><pre>&lt;input type=&quot;text&quot; /&gt;</pre></code></section><section><h3 class="bullet">Elements can be instantiated with JS</h3><hr><code class="bullet language-javascript"><pre>var input = document.createElement('input');</pre></code><hr><code class="bullet language-javascript"><pre>el.innerHTML = '&lt;input type=&quot;text&quot; /&gt;';</pre></code></section><section><h3 class="bullet">Elements are instances</h3><hr><code class="bullet language-javascript"><pre>input instanceof HTMLInputElement; // true</pre></code><hr><code class="bullet language-javascript"><pre>div instanceof HTMLDivElement; // true</pre></code></section><section><h3 class="bullet">Elements perform their own initialisation</h3><hr><code class="bullet language-javascript"><pre>el.innerHTML = '&lt;input type=&quot;text&quot; value=&quot;foobar&quot; /&gt;';</pre></code><hr><code class="bullet language-javascript"><pre>el.querySelector('input').value; // &quot;foobar&quot;</pre></code></section><section><h3 class="bullet">Elements can respond to attribute changes</h3><hr><code class="bullet language-javascript"><pre>input.setAttribute('value', 'Foobar')</pre></code><hr><code class="bullet language-javascript"><pre>input.value; // &quot;Foobar&quot;</pre></code></section><section><h3 class="bullet">Elements can have hidden internal DOM structures</h3><hr><input type="date" class="bullet"><hr><hr><code class="bullet language-markup"><pre>&lt;input type=&quot;date&quot; /&gt;</pre></code><hr><code class="bullet language-javascript"><pre>dateInput.children.length; // 0</pre></code></section><section><h3 class="bullet">Elements have access to child elements</h3><hr><select class="bullet"><option>1</option><option>2</option><option>3</option></select><hr><code class="bullet language-markup"><pre>&lt;select&gt;
+  &lt;option&gt;1&lt;/option&gt;
+  &lt;option&gt;2&lt;/option&gt;
+  &lt;option&gt;3&lt;/option&gt;
+&lt;/select&gt;
+</pre></code></section><section><h3 class="bullet">Elements can have their own private styles</h3><hr><input type="date" class="bullet"><hr><hr><p class="bullet">(Notice you <strong>don't</strong> need to do this)</p><code class="bullet language-markup"><pre>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;calendar.css&quot; /&gt;</pre></code></section><section><h3 class="bullet">Elements can provide style hooks to their internals</h3><code class="bullet language-css"><pre>dialog::backdrop {
+  background: black;
+}
+</pre></code></section><section data-bespoke-state="card"><h1>Custom Elements</h1></section><section><h3 class="bullet">Register a new custom element</h3><code class="bullet language-javascript"><pre>var MyElement = document.register('my-element');
+</pre></code></section><section><h3 class="bullet">Custom elements can be instantiated with markup</h3><code class="bullet language-markup"><pre>&lt;my-element /&gt;</pre></code></section><section><h3 class="bullet">Custom elements can be instantiated with JS</h3><hr><code class="bullet language-javascript"><pre>document.createElement('my-element');</pre></code><hr><code class="bullet language-javascript"><pre>el.innerHTML = '&lt;my-element /&gt;';</pre></code><hr><code class="bullet language-javascript"><pre>new MyElement();</pre></code></section><section><h3 class="bullet">Custom elements are instances</h3><code class="bullet language-javascript"><pre>document.create('my-element') instanceof MyElement; // true</pre></code></section><section class="code-bullets"><h3 class="bullet">Custom elements can perform their own initialisation</h3><hr><code class="bullet language-javascript"><pre>document.register('my-element', {
+  prototype: Object.create(HTMLElement.prototype, {</pre></code><code class="bullet language-javascript"><pre>&nbsp;&nbsp;&nbsp;&nbsp;createdCallback: {
+&nbsp;&nbsp;&nbsp;&nbsp;  value: function() {
+&nbsp;&nbsp;&nbsp;&nbsp;    this.innerHTML = '&lt;h1&gt;ELEMENT CREATED!&lt;/h1&gt;';
+&nbsp;&nbsp;&nbsp;&nbsp;  }
+&nbsp;&nbsp;&nbsp;&nbsp;}</pre></code><code class="bullet language-javascript"><pre>})</pre>});</code></section><section class="code-bullets"><h3 class="bullet">Custom elements can respond to attribute changes</h3><hr><code class="bullet language-javascript"><pre>document.register('my-element', {
+  prototype: Object.create(HTMLElement.prototype, {</pre></code><code class="bullet language-javascript"><pre>&nbsp;&nbsp;&nbsp;&nbsp;attributeChangedCallback: {
+&nbsp;&nbsp;&nbsp;&nbsp;  value: function(attr, oldVal, newVal) {
+&nbsp;&nbsp;&nbsp;&nbsp;    this.innerHTML('&lt;h1&gt;ATTRIBUTE CHANGED!&lt;/h1&gt;');
+&nbsp;&nbsp;&nbsp;&nbsp;  }
+&nbsp;&nbsp;&nbsp;&nbsp;}</pre></code><code class="bullet language-javascript"><pre>})</pre>});</code></section><section data-bespoke-state="card"><h1>Shadow DOM</h1></section><section><h3 class="bullet">Custom elements can have hidden internal DOM structures</h3><hr><code class="bullet language-javascript"><pre>createdCallback: {
+  value: function() {
+    var shadow = this.createShadowRoot();
+    shadow.innerHTML = &quot;&lt;h1&gt;SHADOW DOM!&lt;/h1&gt;&quot;;
+  }
+}
+</pre></code></section><section><h3 class="bullet">Custom elements have access to child elements</h3><hr><code class="bullet language-markup"><pre>&lt;my-element&gt;
+  &lt;i&gt;hello&lt;/i&gt;
+  &lt;i&gt;world&lt;/i&gt;
+&lt;/my-element&gt;</pre></code><hr><code class="bullet language-javascript"><pre>createdCallback: {
+  value: function() {
+    var shadow = this.createShadowRoot();
+    shadow.innerHTML = 'The &lt;i&gt; tags are: &lt;content select=&quot;i&quot; /&gt;';
+  }
+}
+</pre></code></section><section data-bespoke-state="card"><h1>Encapsulated Styles</h1></section><section><h3 class="bullet">Custom elements have encapsulated styles by default</h3><hr><code class="bullet language-javascript"><pre>shadow = this.createShadowRoot();
+shadow.innerHTML =
+  &quot;&lt;style&gt;span { color: green; }&lt;/style&gt;&quot; +
+  &quot;&lt;span&gt;I'm green&lt;/span&gt;&quot;;</pre></code><hr><code class="bullet language-markup"><pre>&lt;my-element /&gt;
+&lt;span&gt;I'm not green&lt;/span&gt;
+</pre></code></section><section><h3 class="bullet">Custom elements can provide style hooks to their internals</h3><hr><code class="bullet language-javascript"><pre>createdCallback: {
+  value: function() {
+    var shadow = this.createShadowRoot();
+    shadow.innerHTML = 'Hello &lt;em part=&quot;world&quot;&gt;World&lt;/em&gt;';
+  }
+}</pre></code><hr><code class="bullet language-css"><pre>my-element::part(world) {
+  color: green;
+}
+</pre></code></section><section class="tech"><div class="bullet"><ul class="tech"><li><span>Simple</span></li><li><span>Consistent</span></li><li><span>Reusable</span></li><li><span>Encapsulated</span></li><li><span>Composable</span></li></ul></div></section><section data-bespoke-state="card"><h1>Just the beginning</h1></section><section><h1 class="bullet"><a href="chrome://flags">chrome://flags</a></h1><hr><h3 class="bullet">Enable "experimental Web Platform features"</h3></section><section><h1 class="bullet">Polyfills</h1><hr><h3 class="bullet">Google's <a href="http://www.polymer-project.org/">Polymer</a></h3><h3 class="bullet">Mozilla's <a href="http://www.x-tags.org/">X-Tag</a></h3></section><section><h1 class="bullet">Components</h1><hr><h3 class="bullet"><a href="https://github.com/Polymer/polymer-elements">Polymer Elements</a></h3><h3 class="bullet"><a href="https://github.com/Polymer/polymer-ui-elements">Polymer UI Elements</a></h3><h3 class="bullet"><a href="http://mozilla.github.io/brick/">Brick</a></h3><h3 class="bullet"><a href="http://registry.x-tags.org/">X-Tag Registry</a></h3></section><section data-bespoke-state="card"><h1>Open the console and experiment</h1></section><section class="thank-you"><a href="http://twitter.com/markdalgleish" target="_blank"><img src="images/avatar.jpg"></a><h1>Thank you!</h1><h3>Slides: <a href="http://bit.ly/alreadyanexpert">bit.ly/alreadyanexpert</a></h3></section></article><script src="bower_components/bespoke.js/dist/bespoke.min.js"></script><script src="bower_components/bespoke-bullets/dist/bespoke-bullets.min.js"></script><script src="bower_components/bespoke-scale/dist/bespoke-scale.min.js"></script><script src="bower_components/bespoke-hash/dist/bespoke-hash.min.js"></script><script src="bower_components/bespoke-progress/dist/bespoke-progress.min.js"></script><script src="bower_components/bespoke-state/dist/bespoke-state.min.js"></script><script src="bower_components/prism/prism.js"></script><script src="scripts/main.js"></script></body></html>

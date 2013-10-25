@@ -1,7 +1,8 @@
-# Web Components
-> A [Bespoke.js](http://markdalgleish.com/projects/bespoke.js) presentation, built with [generator-bespoke](https://github.com/markdalgleish/generator-bespoke)
+### Web Components: Why You're Already An Expert
 
-## View slides locally
+A [Bespoke.js](http://markdalgleish.com/projects/bespoke.js) presentation from Web Directions South 2013 in Sydney, built with [generator-bespoke](https://github.com/markdalgleish/generator-bespoke).
+
+#### View slides locally
 
 First, ensure you have the following installed:
 

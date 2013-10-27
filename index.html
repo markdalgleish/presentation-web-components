@@ -32,7 +32,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;}</pre></code><code class="bullet language-javascript"><pre>})</pre>});</code></section><section class="code-bullets"><h3 class="bullet">Custom elements can respond to attribute changes</h3><hr><code class="bullet language-javascript"><pre>document.register('my-element', {
   prototype: Object.create(HTMLElement.prototype, {</pre></code><code class="bullet language-javascript"><pre>&nbsp;&nbsp;&nbsp;&nbsp;attributeChangedCallback: {
 &nbsp;&nbsp;&nbsp;&nbsp;  value: function(attr, oldVal, newVal) {
-&nbsp;&nbsp;&nbsp;&nbsp;    this.innerHTML('&lt;h1&gt;ATTRIBUTE CHANGED!&lt;/h1&gt;');
+&nbsp;&nbsp;&nbsp;&nbsp;    this.innerHTML = '&lt;h1&gt;ATTRIBUTE CHANGED!&lt;/h1&gt;';
 &nbsp;&nbsp;&nbsp;&nbsp;  }
 &nbsp;&nbsp;&nbsp;&nbsp;}</pre></code><code class="bullet language-javascript"><pre>})</pre>});</code></section><section data-bespoke-state="card"><h1>Shadow DOM</h1></section><section><h3 class="bullet">Custom elements can have hidden internal DOM structures</h3><hr><code class="bullet language-javascript"><pre>createdCallback: {
   value: function() {

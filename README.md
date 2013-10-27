@@ -1,6 +1,6 @@
 ### Web Components: Why You're Already An Expert
 
-A [Bespoke.js](http://markdalgleish.com/projects/bespoke.js) presentation from Web Directions South 2013 in Sydney, built with [generator-bespoke](https://github.com/markdalgleish/generator-bespoke).
+A [Bespoke.js](http://markdalgleish.com/projects/bespoke.js) presentation from [Web Directions South 2013](webdirections.org/wds13/) in Sydney, Australia. Built with [generator-bespoke](https://github.com/markdalgleish/generator-bespoke).
 
 #### View slides locally
 
